@@ -1,0 +1,89 @@
+/* =========================
+   APP GLOBAL RESET
+========================= */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   GLOBAL COFFEE THEME
+========================= */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0b0b;
+  color: rgba(160, 101, 78, 0.71);
+  font-family: "Inter", sans-serif;
+}
+
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", serif;
+  color: rgb(118, 60, 29);
+}
+
+
+/* Accent color */
+.text-accent {
+  color: #C69C6D;
+}
+
+
+/* =========================
+   BUTTON STYLE
+========================= */
+
+button {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+
+/* =========================
+   REMOVE VITE TEMPLATE STYLES
+========================= */
+
+.hero .base,
+.hero .framework,
+.hero .vite {
+  display: none;
+}
+
+
+#next-steps,
+#spacer {
+  display: none;
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* =========================
+   GLOBAL BOX ALIGNMENT
+========================= */
+
+* {
+  box-sizing: border-box;
+}
