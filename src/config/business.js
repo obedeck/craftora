@@ -1,9 +1,11 @@
 export const business = {
   name: "Craftora Coffee",
 
-  phone: "233247585289",
+  phone: "233206966741",
 
-  email: "craftoracofee@gmail.com",
+  whatsapp: "233206966741",
+
+  email: "craftoracoffee@gmail.com",
 
   location: "koforidua, Ghana",
 

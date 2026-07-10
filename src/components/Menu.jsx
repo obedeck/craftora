@@ -5,43 +5,43 @@ export default function Menu() {
   const { addToCart } = useCart();
 
   const items = [
-  {
-    name: "Espresso",
-    price: 25,
-    desc: "Strong and rich shot of pure coffee.",
-    image: "/images/espresso.jpg",
-  },
-  {
-    name: "Cappuccino",
-    price: 35,
-    desc: "Perfect balance of espresso, milk, and foam.",
-    image: "/images/cappuccino.jpg",
-  },
-  {
-    name: "Latte",
-    price: 40,
-    desc: "Smooth and creamy coffee experience.",
-    image: "/images/latte.jpg",
-  },
-  {
-    name: "Mocha",
-    price: 45,
-    desc: "Chocolate-infused coffee delight.",
-    image: "/images/mocha.jpg",
-  },
-  {
-    name: "Americano",
-    price: 30,
-    desc: "Smooth espresso diluted for a lighter taste.",
-    image: "/images/americano.jpg",
-  },
-  {
-    name: "Iced Coffee",
-    price: 38,
-    desc: "Refreshing cold coffee for hot days.",
-    image: "/images/iced-coffee.jpg",
-  },
-];
+    {
+      name: "Espresso",
+      price: 25,
+      desc: "Strong and rich shot of pure coffee.",
+      image: "/images/espresso.jpg",
+    },
+    {
+      name: "Cappuccino",
+      price: 35,
+      desc: "Perfect balance of espresso, milk, and foam.",
+      image: "/images/cappuccino.jpg",
+    },
+    {
+      name: "Latte",
+      price: 40,
+      desc: "Smooth and creamy coffee experience.",
+      image: "/images/latte.jpg",
+    },
+    {
+      name: "Mocha",
+      price: 45,
+      desc: "Chocolate-infused coffee delight.",
+      image: "/images/mocha.jpg",
+    },
+    {
+      name: "Americano",
+      price: 30,
+      desc: "Smooth espresso diluted for a lighter taste.",
+      image: "/images/americano.jpg",
+    },
+    {
+      name: "Iced Coffee",
+      price: 38,
+      desc: "Refreshing cold coffee for hot days.",
+      image: "/images/iced-coffee.jpg",
+    },
+  ];
 
   return (
     <section
@@ -100,6 +100,20 @@ export default function Menu() {
               transition
             "
           >
+
+            {/* COFFEE IMAGE */}
+            <img
+              src={item.image}
+              alt={item.name}
+              className="
+                w-full
+                h-48
+                object-cover
+                rounded-xl
+                mb-5
+              "
+            />
+
 
             {/* COFFEE NAME */}
             <h3 className="text-xl font-bold text-[#3B2A23]">
