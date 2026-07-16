@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
+import { business } from "../config/business";
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -21,54 +23,78 @@ export function CartProvider({ children }) {
     });
   };
 
+
   const increaseQty = (name) => {
     setCart((prev) =>
       prev.map((i) =>
-        i.name === name ? { ...i, qty: i.qty + 1 } : i
+        i.name === name
+          ? { ...i, qty: i.qty + 1 }
+          : i
       )
     );
   };
+
 
   const decreaseQty = (name) => {
     setCart((prev) =>
       prev
         .map((i) =>
-          i.name === name ? { ...i, qty: i.qty - 1 } : i
+          i.name === name
+            ? { ...i, qty: i.qty - 1 }
+            : i
         )
         .filter((i) => i.qty > 0)
     );
   };
 
+
   const removeFromCart = (name) => {
-    setCart((prev) => prev.filter((i) => i.name !== name));
+    setCart((prev) =>
+      prev.filter((i) => i.name !== name)
+    );
   };
 
-  const clearCart = () => setCart([]);
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
     0
   );
 
-  const itemCount = cart.reduce((sum, i) => sum + i.qty, 0);
 
-  // ✅ NEW: WhatsApp order message generator
+  const itemCount = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
+
+  // WhatsApp order message generator
   const formatOrderMessage = () => {
-    let message = "☕ *CRAFTORA ORDER*\n\n";
 
     if (cart.length === 0) {
       return "Cart is empty";
     }
 
+
+    let message = `☕ *${business.name.toUpperCase()} ORDER*\n\n`;
+
+
     cart.forEach((item, index) => {
       message += `${index + 1}. ${item.name} x${item.qty} = ₵${item.price * item.qty}\n`;
     });
 
+
     message += `\n💰 *Total: ₵${total}*\n\n`;
     message += "📍 Please confirm my order.";
 
+
     return message;
   };
+
 
   return (
     <CartContext.Provider
@@ -81,12 +107,10 @@ export function CartProvider({ children }) {
         clearCart,
         total,
         itemCount,
-        formatOrderMessage, // ✅ ADDED HERE
+        formatOrderMessage,
       }}
     >
       {children}
     </CartContext.Provider>
   );
 }
-
-export const useCart = () => useContext(CartContext);

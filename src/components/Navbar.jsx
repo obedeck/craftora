@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MenuDropdown from "./MenuDropdown";
+import { business } from "../config/business";
 
 export default function Navbar({ setCartOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function Navbar({ setCartOpen }) {
         <div className="flex items-center">
           <a href="#top">
             <span className="text-white font-serif text-xl tracking-widest">
-              CRAFTORA
+              {business.name}
             </span>
           </a>
         </div>
@@ -70,17 +71,17 @@ export default function Navbar({ setCartOpen }) {
           <button
             onClick={() => setCartOpen(true)}
             className="
-            hidden md:block
-            border border-[#C69C6D]
-            text-[#C69C6D]
-            px-6 py-2
-            rounded-full
-            text-[11px]
-            tracking-widest
-            uppercase
-            hover:bg-[#C69C6D]
-            hover:text-black
-            transition
+              hidden md:block
+              border border-[#C69C6D]
+              text-[#C69C6D]
+              px-6 py-2
+              rounded-full
+              text-[11px]
+              tracking-widest
+              uppercase
+              hover:bg-[#C69C6D]
+              hover:text-black
+              transition
             "
           >
             Order Now

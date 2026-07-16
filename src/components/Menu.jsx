@@ -1,4 +1,4 @@
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 import { motion } from "framer-motion";
 
 export default function Menu() {
@@ -10,36 +10,42 @@ export default function Menu() {
       price: 25,
       desc: "Strong and rich shot of pure coffee.",
       image: "/images/espresso.jpg",
+      available: false,
     },
     {
       name: "Cappuccino",
       price: 35,
       desc: "Perfect balance of espresso, milk, and foam.",
       image: "/images/cappuccino.jpg",
+      available: true,
     },
     {
-      name: "Latte",
+      name: "Vanilla Latte",
       price: 40,
       desc: "Smooth and creamy coffee experience.",
       image: "/images/latte.jpg",
+      available: true,
     },
     {
       name: "Mocha",
       price: 45,
       desc: "Chocolate-infused coffee delight.",
       image: "/images/mocha.jpg",
+      available: true,
     },
     {
       name: "Americano",
       price: 30,
       desc: "Smooth espresso diluted for a lighter taste.",
       image: "/images/americano.jpg",
+      available: false,
     },
     {
       name: "Iced Coffee",
       price: 38,
       desc: "Refreshing cold coffee for hot days.",
       image: "/images/iced-coffee.jpg",
+      available: true,
     },
   ];
 
@@ -89,7 +95,7 @@ export default function Menu() {
 
             viewport={{ once: true }}
 
-            className="
+            className={`
               bg-white
               p-6
               rounded-2xl
@@ -98,21 +104,46 @@ export default function Menu() {
               border-[#eee]
               hover:shadow-xl
               transition
-            "
+              ${!item.available && "opacity-70"}
+            `}
           >
 
             {/* COFFEE IMAGE */}
-            <img
-              src={item.image}
-              alt={item.name}
-              className="
-                w-full
-                h-48
-                object-cover
-                rounded-xl
-                mb-5
-              "
-            />
+            <div className="relative">
+
+              <img
+                src={item.image}
+                alt={item.name}
+                className="
+                  w-full
+                  h-48
+                  object-cover
+                  rounded-xl
+                  mb-5
+                "
+              />
+
+
+              {!item.available && (
+                <span
+                  className="
+                    absolute
+                    top-3
+                    right-3
+                    bg-black/80
+                    text-white
+                    px-3
+                    py-1
+                    rounded-full
+                    text-xs
+                    font-semibold
+                  "
+                >
+                  Unavailable
+                </span>
+              )}
+
+            </div>
 
 
             {/* COFFEE NAME */}
@@ -133,22 +164,34 @@ export default function Menu() {
             </p>
 
 
-            {/* ADD TO CART */}
+            {/* BUTTON */}
             <button
+              disabled={!item.available}
               onClick={() => addToCart(item)}
-              className="
+              className={`
                 mt-5
                 w-full
-                bg-[#C69C6D]
-                text-black
                 py-2
                 rounded-full
-                hover:bg-[#b8895f]
-                transition
                 font-semibold
-              "
+                transition
+
+                ${
+                  item.available
+                    ? `
+                    bg-[#C69C6D]
+                    text-black
+                    hover:bg-[#b8895f]
+                    `
+                    : `
+                    bg-gray-300
+                    text-gray-600
+                    cursor-not-allowed
+                    `
+                }
+              `}
             >
-              Add to Cart
+              {item.available ? "Add to Cart" : "Unavailable"}
             </button>
 
 

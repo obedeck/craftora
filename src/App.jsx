@@ -6,7 +6,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import Cart from "./components/Cart";
-import { useCart } from "./context/CartContext";
+import { useCart } from "./context/useCart";
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);

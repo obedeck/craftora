@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 import { business } from "../config/business";
 
 export default function Cart({ cartOpen, setCartOpen }) {
@@ -19,7 +19,7 @@ export default function Cart({ cartOpen, setCartOpen }) {
   const sendWhatsApp = () => {
     if (cart.length === 0) return;
 
-    let message = "☕ *CRAFTORA ORDER*\n\n";
+    let message = "☕ *ONYX ORDER*\n\n";
 
     message += `👤 Customer: ${customerName || "Not provided"}\n`;
     message += `📦 Order Type: ${orderType}\n\n`;
