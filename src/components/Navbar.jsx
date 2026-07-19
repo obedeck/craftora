@@ -11,14 +11,27 @@ export default function Navbar({ setCartOpen }) {
       <div className="max-w-7xl mx-auto px-6 md:px-16 h-20 flex items-center justify-between">
 
 
-        {/* LOGO */}
-        <div className="flex items-center">
-          <a href="#top">
-            <span className="text-white font-serif text-xl tracking-widest">
-              {business.name}
-            </span>
-          </a>
-        </div>
+      {/* LOGO */}
+<div className="flex items-center">
+
+  <a 
+    href="#top"
+    className="flex items-center gap-3"
+  >
+
+    <img
+      src="/images/onyx-icon.png"
+      alt="ONYX Brew Co."
+      className="w-10 h-10 object-contain"
+    />
+
+    <span className="text-white font-serif text-xl tracking-widest">
+      {business.name}
+    </span>
+
+  </a>
+
+</div>
 
 
         {/* NAV LINKS */}
