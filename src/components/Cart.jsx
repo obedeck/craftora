@@ -3,6 +3,7 @@ import { useCart } from "../context/useCart";
 import { business } from "../config/business";
 
 export default function Cart({ cartOpen, setCartOpen }) {
+
   const {
     cart,
     increaseQty,
@@ -12,232 +13,388 @@ export default function Cart({ cartOpen, setCartOpen }) {
     total,
   } = useCart();
 
+
   const [customerName, setCustomerName] = useState("");
-  const [orderType, setOrderType] = useState("Pickup");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [orderType, setOrderType] = useState("Order Now");
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [deliverySlot, setDeliverySlot] = useState("");
+  const [location, setLocation] = useState("");
   const [notes, setNotes] = useState("");
 
+
+
   const sendWhatsApp = () => {
+
     if (cart.length === 0) return;
 
-    let message = "☕ *ONYX ORDER*\n\n";
+
+    let message = "☕ *ONYX COFFEE ORDER*\n\n";
+
 
     message += `👤 Customer: ${customerName || "Not provided"}\n`;
-    message += `📦 Order Type: ${orderType}\n\n`;
 
-    message += "*Items:*\n";
+    message += `📞 Phone: ${phoneNumber || "Not provided"}\n`;
 
-    cart.forEach((item, index) => {
+    message += `📦 Order Type: ${orderType}\n`;
+
+
+
+    if(orderType === "Pre-order"){
+
+      if(deliveryDate){
+        message += `📅 Delivery Date: ${deliveryDate}\n`;
+      }
+
+
+      if(deliverySlot){
+        message += `⏰ Delivery Batch: ${deliverySlot}\n`;
+      }
+
+    }
+
+
+    if(orderType === "Order Now"){
+      message += "⚡ Delivery: ASAP (subject to availability)\n";
+    }
+
+
+
+    if(location){
+      message += `📍 Location: ${location}\n`;
+    }
+
+
+
+    message += "\n*Items:*\n";
+
+
+
+    cart.forEach((item,index)=>{
+
       message += `${index + 1}. ${item.name} x${item.qty} = ₵${item.price * item.qty}\n`;
+
     });
+
+
 
     message += `\n💰 *Total: ₵${total}*\n`;
 
-    if (notes) {
-      message += `\n📝 Note: ${notes}\n`;
+
+
+    if(notes){
+      message += `\n📝 Notes: ${notes}\n`;
     }
 
-    message += "\n📍 Please confirm my order.";
 
-    const phone = business.phone;
 
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    message += "\n✅ Please confirm availability and delivery time.";
 
-    window.open(url, "_blank");
+
+
+    const url =
+    `https://wa.me/${business.phone}?text=${encodeURIComponent(message)}`;
+
+
+    window.open(url,"_blank");
+
   };
 
 
+
+
   return (
-    <div
-      className={`fixed top-0 right-0 h-full w-[360px]
-      bg-[#111] text-white shadow-2xl z-[200]
-      transform transition-transform duration-300
-      ${
-        cartOpen ? "translate-x-0" : "translate-x-full"
-      }`}
-    >
 
-      {/* HEADER */}
-      <div className="flex justify-between items-center p-5 border-b border-white/10">
+<div
+className={`fixed top-0 right-0 h-full w-[360px]
+bg-[#111] text-white shadow-2xl z-[200]
+transform transition-transform duration-300
+${cartOpen ? "translate-x-0" : "translate-x-full"}`}
+>
 
-        <h2 className="text-lg font-serif text-[#C69C6D]">
-          Your Order
-        </h2>
 
-        <button
-          onClick={() => setCartOpen(false)}
-          className="text-white text-xl hover:text-red-400"
-        >
-          ✕
-        </button>
+<div className="flex justify-between items-center p-5 border-b border-white/10">
 
-      </div>
 
+<h2 className="text-lg font-serif text-[#C69C6D]">
+Your Order
+</h2>
 
 
-      {/* CONTENT */}
-      <div className="p-4 overflow-y-auto h-[65%] space-y-4">
+<button
+onClick={()=>setCartOpen(false)}
+className="text-xl"
+>
+✕
+</button>
 
 
-        {/* ITEMS */}
-        {cart.length === 0 ? (
+</div>
 
-          <p className="text-gray-400 text-center mt-10">
-            Your cart is empty
-          </p>
 
-        ) : (
 
-          cart.map((item) => (
 
-            <div
-              key={item.name}
-              className="bg-[#1c1c1c] p-4 rounded-xl"
-            >
 
-              <div className="flex justify-between items-center">
+<div className="p-4 overflow-y-auto h-[65%] space-y-4">
 
-                <p className="font-semibold">
-                  {item.name}
-                </p>
 
-                <span className="text-[#C69C6D]">
-                  ₵{item.price * item.qty}
-                </span>
+{cart.length===0 ? (
 
-              </div>
+<p className="text-gray-400 text-center mt-10">
+Your cart is empty
+</p>
 
+):(
 
-              <div className="flex items-center gap-3 mt-3">
 
-                <button
-                  onClick={() => decreaseQty(item.name)}
-                  className="bg-white/10 px-3 py-1 rounded"
-                >
-                  -
-                </button>
+cart.map(item=>(
 
+<div
+key={item.name}
+className="bg-[#1c1c1c] p-4 rounded-xl"
+>
 
-                <span>
-                  {item.qty}
-                </span>
 
+<div className="flex justify-between">
 
-                <button
-                  onClick={() => increaseQty(item.name)}
-                  className="bg-white/10 px-3 py-1 rounded"
-                >
-                  +
-                </button>
+<p>
+{item.name}
+</p>
 
+<span className="text-[#C69C6D]">
+₵{item.price * item.qty}
+</span>
 
-                <button
-                  onClick={() => removeFromCart(item.name)}
-                  className="ml-auto text-red-400 text-sm"
-                >
-                  Remove
-                </button>
 
-              </div>
+</div>
 
-            </div>
 
-          ))
 
-        )}
+<div className="flex gap-3 mt-3">
 
 
+<button
+onClick={()=>decreaseQty(item.name)}
+className="bg-white/10 px-3 rounded"
+>
+-
+</button>
 
-        {/* CUSTOMER DETAILS */}
 
-        {cart.length > 0 && (
+<span>
+{item.qty}
+</span>
 
-          <div className="space-y-4 pt-4">
 
-            <h3 className="text-[#C69C6D] font-semibold">
-              Customer Details
-            </h3>
+<button
+onClick={()=>increaseQty(item.name)}
+className="bg-white/10 px-3 rounded"
+>
++
+</button>
 
 
-            <input
-              type="text"
-              placeholder="Your name"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              className="w-full bg-[#1c1c1c] p-3 rounded-lg text-white outline-none"
-            />
+<button
+onClick={()=>removeFromCart(item.name)}
+className="ml-auto text-red-400 text-sm"
+>
+Remove
+</button>
 
 
-            <select
-              value={orderType}
-              onChange={(e) => setOrderType(e.target.value)}
-              className="w-full bg-[#1c1c1c] p-3 rounded-lg text-white outline-none"
-            >
+</div>
 
-              <option>
-                Pickup
-              </option>
 
-              <option>
-                Delivery
-              </option>
+</div>
 
-            </select>
+))
 
 
-            <textarea
-              placeholder="Order notes (optional)"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full bg-[#1c1c1c] p-3 rounded-lg text-white outline-none h-20"
-            />
+)}
 
-          </div>
 
-        )}
 
-      </div>
 
 
+{cart.length>0 && (
 
-      {/* FOOTER */}
+<div className="space-y-4 pt-4">
 
-      <div className="absolute bottom-0 w-full p-5 border-t border-white/10 bg-[#111]">
 
+<h3 className="text-[#C69C6D] font-semibold">
+Customer Details
+</h3>
 
-        <div className="flex justify-between font-bold mb-4">
 
-          <span>
-            Total
-          </span>
 
-          <span className="text-[#C69C6D]">
-            ₵{total}
-          </span>
+<input
+placeholder="Your name"
+value={customerName}
+onChange={(e)=>setCustomerName(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+/>
 
-        </div>
 
 
+<input
+placeholder="Phone number"
+value={phoneNumber}
+onChange={(e)=>setPhoneNumber(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+/>
 
-        <button
-          onClick={sendWhatsApp}
-          className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-semibold transition"
-        >
-          📲 Order via WhatsApp
-        </button>
 
 
 
-        <button
-          onClick={clearCart}
-          className="w-full bg-white/10 hover:bg-white/20 py-2 rounded-full mt-3 transition"
-        >
-          Clear Cart
-        </button>
+<select
+value={orderType}
+onChange={(e)=>{
+setOrderType(e.target.value);
+setDeliverySlot("");
+}}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+>
 
 
-      </div>
+<option>
+Order Now
+</option>
 
 
-    </div>
+<option>
+Pre-order
+</option>
+
+
+</select>
+
+
+
+
+{orderType==="Pre-order" && (
+
+<>
+
+
+<input
+type="date"
+value={deliveryDate}
+onChange={(e)=>setDeliveryDate(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+/>
+
+
+
+<select
+value={deliverySlot}
+onChange={(e)=>setDeliverySlot(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+>
+
+
+<option value="">
+Choose delivery batch
+</option>
+
+
+<option>
+Morning Batch (1PM - 3PM)
+</option>
+
+
+<option>
+Afternoon Batch (5PM - 7PM)
+</option>
+
+
+</select>
+
+
+</>
+
+)}
+
+
+
+
+<input
+placeholder="Delivery location"
+value={location}
+onChange={(e)=>setLocation(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg"
+/>
+
+
+
+
+<textarea
+placeholder="Order notes (optional)"
+value={notes}
+onChange={(e)=>setNotes(e.target.value)}
+className="w-full bg-[#1c1c1c] p-3 rounded-lg h-20"
+/>
+
+
+
+<div className="bg-[#1c1c1c] p-4 rounded-lg text-sm text-gray-400">
+
+☕ Pre-orders are recommended for bottled brews to guarantee freshness.
+
+</div>
+
+
+</div>
+
+)}
+
+
+</div>
+
+
+
+
+
+<div className="absolute bottom-0 w-full p-5 border-t border-white/10 bg-[#111]">
+
+
+<div className="flex justify-between mb-4 font-bold">
+
+<span>
+Total
+</span>
+
+<span className="text-[#C69C6D]">
+₵{total}
+</span>
+
+
+</div>
+
+
+
+
+<button
+onClick={sendWhatsApp}
+className="w-full bg-green-500 py-3 rounded-full font-semibold"
+>
+📲 Send Order via WhatsApp
+</button>
+
+
+
+<button
+onClick={clearCart}
+className="w-full bg-white/10 py-2 rounded-full mt-3"
+>
+Clear Cart
+</button>
+
+
+</div>
+
+
+
+</div>
+
   );
 }

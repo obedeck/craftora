@@ -2,6 +2,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Menu from "./components/Menu";
+import BottledMenu from "./components/BottledMenu";
+import DeliveryNotice from "./components/DeliveryNotice";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useState } from "react";
@@ -27,6 +29,18 @@ export default function App() {
       <section id="menu" className="w-full">
         <Menu />
       </section>
+
+{/* DELIVERY NOTICE */}
+<section id="delivery" className="w-full">
+  <DeliveryNotice />
+</section>
+
+      {/* BOTTLED COLLECTION */}
+<section id="bottled" className="w-full">
+  <BottledMenu />
+</section>
+
+
 
       {/* ABOUT SECTION */}
       <section id="about" className="w-full">
