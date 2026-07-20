@@ -49,71 +49,150 @@ export default function Menu() {
     },
   ];
 
+
   return (
-    <section
+    <motion.section
+
       id="menu"
-      className="py-24 px-6 md:px-16 bg-[#F8F4F0]"
+
+      initial={{
+        opacity: 0,
+        y: 50,
+      }}
+
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+
+      transition={{
+        duration: 0.8,
+      }}
+
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+
+      className="
+      py-24
+      px-6
+      md:px-16
+      bg-[#F8F4F0]
+      "
+
     >
 
+
       {/* HEADER */}
+
       <div className="text-center mb-14 max-w-2xl mx-auto">
 
         <h2 className="text-3xl md:text-4xl font-serif text-[#3B2A23]">
           Our Signature Menu
         </h2>
 
+
         <p className="text-gray-500 mt-4 leading-relaxed">
           Crafted with passion, served with perfection.
         </p>
 
+
       </div>
 
 
+
+
+
       {/* GRID */}
-      <motion.div
-        className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+
+      <div className="
+      max-w-6xl
+      mx-auto
+      grid
+      grid-cols-1
+      md:grid-cols-3
+      gap-10
+      ">
+
 
         {items.map((item, index) => (
 
+
           <motion.div
+
+
             key={index}
 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
 
-            transition={{
-              duration: 0.4,
-              delay: index * 0.1
+            initial={{
+              opacity: 0,
+              y: 40,
             }}
 
-            whileHover={{ scale: 1.05 }}
 
-            viewport={{ once: true }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+
+
+            transition={{
+              duration: 0.5,
+              delay: index * 0.1,
+            }}
+
+
+            whileHover={{
+              y: -8,
+            }}
+
+
+            viewport={{
+              once: true,
+            }}
+
 
             className={`
               bg-white
               p-6
               rounded-2xl
-              shadow-sm
               border
               border-[#eee]
-              hover:shadow-xl
-              transition
-              ${!item.available && "opacity-70"}
+              transition-all
+              duration-300
+              hover:border-[#C69C6D]/50
+              hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]
+              ${!item.available ? "opacity-70" : ""}
             `}
+
+
           >
 
-            {/* COFFEE IMAGE */}
+
+
+            {/* IMAGE */}
+
             <div className="relative">
 
-              <img
+
+              <motion.img
+
                 src={item.image}
+
                 alt={item.name}
+
+
+                whileHover={{
+                  scale: 1.05,
+                }}
+
+
+                transition={{
+                  duration: 0.4,
+                }}
+
+
                 className="
                   w-full
                   h-48
@@ -121,10 +200,14 @@ export default function Menu() {
                   rounded-xl
                   mb-5
                 "
+
               />
 
 
+
+
               {!item.available && (
+
                 <span
                   className="
                     absolute
@@ -141,66 +224,114 @@ export default function Menu() {
                 >
                   Unavailable
                 </span>
+
               )}
+
+
 
             </div>
 
 
-            {/* COFFEE NAME */}
+
+
+
+
+            {/* DETAILS */}
+
+
             <h3 className="text-xl font-bold text-[#3B2A23]">
               {item.name}
             </h3>
 
 
-            {/* DESCRIPTION */}
+
+
             <p className="text-gray-600 mt-3 leading-relaxed">
               {item.desc}
             </p>
 
 
-            {/* PRICE */}
+
+
             <p className="mt-4 font-semibold text-[#C69C6D] text-lg">
               ₵{item.price}
             </p>
 
 
+
+
+
+
             {/* BUTTON */}
+
+
             <button
+
               disabled={!item.available}
+
               onClick={() => addToCart(item)}
+
+
               className={`
+
                 mt-5
                 w-full
-                py-2
+                py-3
                 rounded-full
                 font-semibold
-                transition
+                transition-all
+                duration-300
+
 
                 ${
                   item.available
-                    ? `
-                    bg-[#C69C6D]
-                    text-black
-                    hover:bg-[#b8895f]
-                    `
-                    : `
-                    bg-gray-300
-                    text-gray-600
-                    cursor-not-allowed
-                    `
+
+                  ?
+
+                  `
+                  bg-[#C69C6D]
+                  text-black
+                  hover:bg-[#b8895f]
+                  hover:-translate-y-1
+                  hover:shadow-[0_0_25px_rgba(198,156,109,0.45)]
+                  `
+
+                  :
+
+                  `
+                  bg-gray-300
+                  text-gray-600
+                  cursor-not-allowed
+                  `
                 }
+
               `}
+
             >
-              {item.available ? "Add to Cart" : "Unavailable"}
+
+              {
+                item.available
+                ? 
+                "Add to Cart"
+                :
+                "Unavailable"
+              }
+
+
             </button>
+
+
 
 
           </motion.div>
 
+
         ))}
 
-      </motion.div>
 
-    </section>
+      </div>
+
+
+    </motion.section>
   );
 }

@@ -109,7 +109,7 @@ export default function BottledMenu() {
             }}
 
             whileHover={{
-              scale: 1.03
+              y: -8,
             }}
 
             className="
@@ -119,8 +119,12 @@ export default function BottledMenu() {
               rounded-3xl
               overflow-hidden
               p-6
-              transition
+              transition-all
+              duration-300
+              hover:border-[#C69C6D]/40
+              hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]
             "
+
           >
 
 
@@ -128,16 +132,29 @@ export default function BottledMenu() {
 
             <div className="relative">
 
-              <img
+              <motion.img
+
                 src={item.image}
+
                 alt={item.name}
+
+                whileHover={{
+                  scale: 1.05,
+                }}
+
+                transition={{
+                  duration: 0.4,
+                }}
+
                 className="
                 w-full
                 h-72
                 object-cover
                 rounded-2xl
                 "
+
               />
+
 
 
               {/* PREORDER BADGE */}
@@ -158,7 +175,7 @@ export default function BottledMenu() {
                   rounded-full
                   "
                 >
-                  Pre-order Recommended
+                  Pre-order for Freshness
                 </span>
 
               )}
@@ -190,6 +207,7 @@ export default function BottledMenu() {
 
 
 
+
             {/* DETAILS */}
 
             <div className="mt-6">
@@ -207,8 +225,6 @@ export default function BottledMenu() {
 
 
 
-
-              {/* EXTRA INFO */}
 
               <div className="mt-4 space-y-2 text-sm text-gray-400">
 
@@ -244,6 +260,7 @@ export default function BottledMenu() {
 
 
 
+
               {/* BUTTON */}
 
               <button
@@ -253,27 +270,37 @@ export default function BottledMenu() {
                 onClick={() => addToCart(item)}
 
                 className={`
+
                 mt-6
                 w-full
                 py-3
                 rounded-full
                 font-semibold
-                transition
+
+                transition-all
+                duration-300
 
                 ${
                   item.available
+
                   ?
+
                   `
                   bg-[#C69C6D]
                   text-black
                   hover:bg-[#b8895f]
+                  hover:-translate-y-1
+                  hover:shadow-[0_0_25px_rgba(198,156,109,0.45)]
                   `
+
                   :
+
                   `
                   bg-gray-700
                   text-gray-400
                   cursor-not-allowed
                   `
+
                 }
 
                 `}
@@ -305,9 +332,11 @@ export default function BottledMenu() {
 
 
 
+
       {/* FOOTNOTE */}
 
-      <p className="
+      <p
+      className="
       text-center
       text-gray-500
       text-sm
