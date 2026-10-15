@@ -11,7 +11,8 @@ export const business = {
 
   phone: "0206966741 / 0247585289",
 
-  whatsapp: "0206966741 / 0247585289",
+  whatsapp: "233206966741",
+  whatsapp2: "233247585289",
 
   email: "Onyxcoffee@gmail.com",
 
