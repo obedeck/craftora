@@ -111,9 +111,9 @@ export default function Features() {
         ">
 
           At {business.name}, we believe great coffee should be more than a drink.
-          It should be a fresh, convenient experience. Our bottled brews are
-          carefully crafted using quality ingredients and prepared to deliver
-          café-style flavour wherever you are.
+          It should be a fresh, convenient experience. Our cold brews are
+          carefully crafted using quality coffee grounds from Gold Coast Roasters and prepared to deliver
+          café-style flavour.
 
         </p>
 

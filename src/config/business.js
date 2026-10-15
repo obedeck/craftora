@@ -9,9 +9,9 @@ export const business = {
     "Premium bottled iced coffee brewed in small batches and delivered chilled.",
 
 
-  phone: "233206966741",
+  phone: "0206966741 / 0247585289",
 
-  whatsapp: "233206966741",
+  whatsapp: "0206966741 / 0247585289",
 
   email: "Onyxcoffee@gmail.com",
 

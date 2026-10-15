@@ -268,10 +268,24 @@ export default function Footer() {
         All rights reserved.
 
 
+      
       </div>
 
-
+      {/* POWERED BY ECK */}
+      <div className="
+        text-center
+        mt-6
+        text-xs
+        tracking-widest
+        text-gray-500
+      ">
+        Powered by{" "}
+        <span className="font-semibold text-[#C69C6D]">
+          O.B ECK 
+        </span>
+      </div>
 
     </motion.footer>
+
   );
 }

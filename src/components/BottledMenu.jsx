@@ -7,7 +7,7 @@ export default function BottledMenu() {
   const bottledItems = [
     {
       name: "Vanilla Latte",
-      price: 45,
+      price: 35,
       size: "500ml Bottle",
       desc: "Smooth espresso blended with creamy milk and a touch of vanilla sweetness.",
       storage: "Keep refrigerated",
@@ -18,7 +18,7 @@ export default function BottledMenu() {
 
     {
       name: "Ice Mocha",
-      price: 50,
+      price: 35,
       size: "500ml Bottle",
       desc: "A rich blend of espresso, chocolate, and milk served chilled.",
       storage: "Keep refrigerated",
@@ -28,13 +28,13 @@ export default function BottledMenu() {
     },
 
     {
-      name: "Cinnamon Latte",
-      price: 50,
+      name: "Caramel Latte",
+      price: 35,
       size: "500ml Bottle",
-      desc: "Creamy latte infused with warm cinnamon notes for a unique flavour.",
+      desc: "Creamy latte infused with caramel for a unique flavour.",
       storage: "Keep refrigerated",
       preOrder: true,
-      image: "/images/cinnamon-latte.png",
+      image: "/images/caramel-latte.jpg",
       available: true,
     },
   ];
