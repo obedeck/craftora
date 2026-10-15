@@ -92,11 +92,11 @@ export default function Cart({ cartOpen, setCartOpen }) {
 
 
 
-    const url =
-    `https://wa.me/${business.phone}?text=${encodeURIComponent(message)}`;
+const url =
+  `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(message)}`;
 
+window.open(url, "_blank");
 
-    window.open(url,"_blank");
 
   };
 
