@@ -1,295 +1,119 @@
+
 import { motion } from "framer-motion";
+
+const deliveryOptions = [
+  {
+    icon: "🛍️",
+    title: "Order Throughout the Day",
+    description:
+      "Place your order anytime during our working hours. No morning or evening batch deadlines.",
+    label: "OPEN FOR ORDERS",
+  },
+  {
+    icon: "🕒",
+    title: "Scheduled Delivery",
+    description:
+      "Planning ahead? Choose your preferred delivery window when placing a pre-order.",
+    windows: ["11:00 AM – 2:00 PM", "2:00 PM – 5:00 PM"],
+  },
+  {
+    icon: "⚡",
+    title: "Need It Sooner?",
+    description:
+      "Request the earliest available delivery. We'll confirm your delivery time via WhatsApp.",
+    label: "SUBJECT TO AVAILABILITY",
+  },
+];
 
 export default function DeliveryNotice() {
   return (
     <motion.section
-
-      initial={{
-        opacity: 0,
-        y: 60,
-      }}
-
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-
-      transition={{
-        duration: 0.9,
-        ease: "easeOut",
-      }}
-
-      viewport={{
-        once: true,
-        amount: 0.3,
-      }}
-
-      className="
-      py-20
-      px-6
-      md:px-16
-      bg-[#141414]
-      text-white
-      "
+      id="delivery"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="bg-[#141414] px-6 py-20 text-white md:px-16"
     >
-
-      <div className="max-w-5xl mx-auto text-center">
-
-
-        <motion.h2
-
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-
-          transition={{
-            duration: 0.6,
-          }}
-
-          viewport={{
-            once: true,
-          }}
-
-          className="text-3xl md:text-4xl font-serif text-[#C69C6D]"
-        >
-          ONYX Delivery Schedule
-        </motion.h2>
-
-
-
-        <motion.p
-
-          initial={{
-            opacity: 0,
-          }}
-
-          whileInView={{
-            opacity: 1,
-          }}
-
-          transition={{
-            duration: 0.6,
-            delay: 0.2,
-          }}
-
-          viewport={{
-            once: true,
-          }}
-
-          className="text-gray-400 mt-4 max-w-2xl mx-auto"
-        >
-          Freshly crafted in small batches and delivered chilled to your doorstep.
-        </motion.p>
-
-
-
-
-
-        <div
-          className="
-          grid
-          grid-cols-1
-          md:grid-cols-2
-          gap-8
-          mt-12
-          "
-        >
-
-
-
-          {/* MORNING */}
-
-          <motion.div
-
-            initial={{
-              opacity: 0,
-              x: -40,
-            }}
-
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-
-            transition={{
-              duration: 0.7,
-            }}
-
-            whileHover={{
-              y: -6,
-            }}
-
-            viewport={{
-              once: true,
-            }}
-
-            className="
-            bg-[#0b0b0b]
-            border
-            border-white/10
-            rounded-2xl
-            p-8
-            transition-all
-            duration-300
-            hover:border-[#C69C6D]/40
-            hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]
-            "
-          >
-
-            <div className="text-4xl">
-              ☀️
-            </div>
-
-
-            <h3 className="text-xl font-semibold mt-4">
-              Morning Batch
-            </h3>
-
-
-
-            <p className="text-gray-400 mt-3">
-              Orders close:
-              <span className="text-[#C69C6D]">
-                {" "}11:00 AM
-              </span>
-            </p>
-
-
-
-            <p className="text-gray-400 mt-2">
-              Delivery:
-              <span className="text-[#C69C6D]">
-                {" "}1:00 PM - 3:00 PM
-              </span>
-            </p>
-
-
-          </motion.div>
-
-
-
-
-
-          {/* EVENING */}
-
-          <motion.div
-
-            initial={{
-              opacity: 0,
-              x: 40,
-            }}
-
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-
-            transition={{
-              duration: 0.7,
-              delay: 0.15,
-            }}
-
-            whileHover={{
-              y: -6,
-            }}
-
-            viewport={{
-              once: true,
-            }}
-
-            className="
-            bg-[#0b0b0b]
-            border
-            border-white/10
-            rounded-2xl
-            p-8
-            transition-all
-            duration-300
-            hover:border-[#C69C6D]/40
-            hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]
-            "
-          >
-
-            <div className="text-4xl">
-              🌙
-            </div>
-
-
-
-            <h3 className="text-xl font-semibold mt-4">
-              Evening Batch
-            </h3>
-
-
-
-
-            <p className="text-gray-400 mt-3">
-              Orders close:
-              <span className="text-[#C69C6D]">
-                {" "}3:00 PM
-              </span>
-            </p>
-
-
-
-
-            <p className="text-gray-400 mt-2">
-              Delivery:
-              <span className="text-[#C69C6D]">
-                {" "}5:00 PM - 7:00 PM
-              </span>
-            </p>
-
-
-          </motion.div>
-
-
+      <div className="mx-auto max-w-6xl">
+        {/* HEADER */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#C69C6D]">
+            Freshness, On Your Time
+          </p>
+
+          <h2 className="font-serif text-3xl text-[#C69C6D] md:text-4xl">
+            ONYX Delivery
+          </h2>
+
+          <p className="mt-4 leading-relaxed text-gray-400">
+            Freshly crafted in small batches and delivered chilled to your
+            doorstep. Order during our working hours and choose what works
+            best for you.
+          </p>
         </div>
 
+        {/* DELIVERY OPTIONS */}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {deliveryOptions.map((option, index) => (
+            <motion.div
+              key={option.title}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              whileHover={{ y: -5 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-white/10 bg-[#0b0b0b] p-7 transition-all duration-300 hover:border-[#C69C6D]/50 hover:shadow-xl"
+            >
+              <div className="text-4xl" aria-hidden="true">
+                {option.icon}
+              </div>
 
+              <h3 className="mt-5 text-xl font-semibold">
+                {option.title}
+              </h3>
 
+              <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                {option.description}
+              </p>
 
+              {option.windows && (
+                <div className="mt-5 space-y-3">
+                  {option.windows.map((window) => (
+                    <div
+                      key={window}
+                      className="rounded-lg border border-[#C69C6D]/20 bg-[#C69C6D]/10 px-4 py-3 text-sm font-medium text-[#C69C6D]"
+                    >
+                      🕒 {window}
+                    </div>
+                  ))}
+                </div>
+              )}
 
-        <motion.p
+              {option.label && (
+                <p className="mt-5 text-xs font-semibold tracking-wider text-[#C69C6D]">
+                  {option.label}
+                </p>
+              )}
+            </motion.div>
+          ))}
+        </div>
 
-          initial={{
-            opacity: 0,
-          }}
-
-          whileInView={{
-            opacity: 1,
-          }}
-
-          transition={{
-            duration: 0.6,
-            delay: 0.4,
-          }}
-
-          viewport={{
-            once: true,
-          }}
-
-          className="
-          mt-10
-          text-sm
-          text-gray-500
-          "
+        {/* DELIVERY NOTE */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mx-auto mt-10 max-w-3xl rounded-xl border border-white/10 bg-white/[0.03] p-5 text-center"
         >
-          ☕ Orders are prepared fresh after confirmation.
-          Delivery times may vary slightly depending on location.
-        </motion.p>
-
-
-
+          <p className="text-sm leading-relaxed text-gray-400">
+            ☕ All delivery windows are preferences rather than guaranteed
+            arrival times. We'll confirm your order and delivery time via
+            WhatsApp before dispatch.
+          </p>
+        </motion.div>
       </div>
-
-
     </motion.section>
   );
 }

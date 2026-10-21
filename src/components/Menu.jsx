@@ -1,337 +1,209 @@
+
+import { useState } from "react";
 import { useCart } from "../context/useCart";
 import { motion } from "framer-motion";
+
+const sizes = [
+  { label: "16 oz", type: "Cup", price: 30 },
+  { label: "22 oz", type: "Cup", price: 35 },
+  { label: "500 ml", type: "Bottle", price: 35 },
+];
+
+const items = [
+  {
+    name: "Onyx Velvet",
+    desc: "Caramel, cocoa, and a touch of cinnamon.",
+    image: "/images/onyx-velvet.jpeg",
+    available: true,
+  },
+  {
+    name: "Caramel Macchiato",
+    desc: "Rich caramel with espresso, milk, and foam.",
+    image: "/images/caramel-macchiato.jpeg",
+    available: true,
+  },
+  {
+    name: "Spanish Latte",
+    desc: "A sweet, smooth and creamy coffee experience.",
+    image: "/images/spanish-latte.jpeg",
+    available: true,
+  },
+  {
+    name: "Mocha",
+    desc: "Chocolate-infused coffee delight.",
+    image: "/images/onyx-velvet.jpeg",
+    available: true,
+  },
+  {
+    name: "Vanilla Latte",
+    desc: "A light, smooth vanilla taste.",
+    image: "/images/vanilla-latte.jpeg",
+    available: true,
+  },
+  {
+    name: "Dalgona Whipped Coffee",
+    desc: "Refreshing cold coffee for hot days.",
+    image: "/images/dalgona-whipped-coffee.jpg",
+    available: false,
+  },
+];
 
 export default function Menu() {
   const { addToCart } = useCart();
 
-  const items = [
-    {
-      name: "Onyx Velvet",
-      price: 35,
-      desc: "Caramel, cocoa, and a touch of cinnamon.",
-      image: "/images/onyx-velvet.jpeg",
-      available: true,
-    },
-    {
-      name: "Caramel Macchiato",
-      price: 35,
-      desc: "Rich caramel,Perfect balance of espresso, milk, and foam.",
-      image: "/images/caramel-macchiato.jpeg",
-      available: true,
-    },
-    {
-      name: "Spanish Latte",
-      price: 35,
-      desc: "Sweet, Smooth and creamy coffee experience.",
-      image: "/images/spanish-latte.jpeg",
-      available: true,
-    },
-    {
-      name: "Mocha",
-      price: 35,
-      desc: "Chocolate-infused coffee delight.",
-      image: "/images/onyx-velvet.jpeg",
-      available: true,
-    },
-    {
-      name: "Vanilla Latte",
-      price: 35,
-      desc: "Light, smooth vanilla taste.",
-      image: "/images/vanilla-latte.jpeg",
-      available: true,
-    },
-    {
-      name: "Dalgona whipped coffee",
-      price: 35,
-      desc: "Refreshing cold coffee for hot days.",
-      image: "/images/dalgona-whipped-coffee.jpg",
-      available: false,
-    },
-  ];
-
-
   return (
     <motion.section
-
       id="menu"
-
-      initial={{
-        opacity: 0,
-        y: 50,
-      }}
-
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-
-      transition={{
-        duration: 0.8,
-      }}
-
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-
-      className="
-      py-24
-      px-6
-      md:px-16
-      bg-[#F8F4F0]
-      "
-
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="bg-[#F8F4F0] px-6 py-24 md:px-16"
     >
+      {/* MENU HEADER */}
+      <div className="mx-auto mb-14 max-w-2xl text-center">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#A47B50]">
+          The ONYX Collection
+        </p>
 
-
-      {/* HEADER */}
-
-      <div className="text-center mb-14 max-w-2xl mx-auto">
-
-        <h2 className="text-3xl md:text-4xl font-serif text-[#3B2A23]">
+        <h2 className="font-serif text-3xl text-[#3B2A23] md:text-4xl">
           Our Signature Menu
         </h2>
 
-
-        <p className="text-gray-500 mt-4 leading-relaxed">
+        <p className="mt-4 leading-relaxed text-gray-500">
           Crafted with passion, served with perfection.
         </p>
-
-
       </div>
 
-
-
-
-
-      {/* GRID */}
-
-      <div className="
-      max-w-6xl
-      mx-auto
-      grid
-      grid-cols-1
-      md:grid-cols-3
-      gap-10
-      ">
-
-
+      {/* DRINK CARDS */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => (
-
-
-          <motion.div
-
-
-            key={index}
-
-
-            initial={{
-              opacity: 0,
-              y: 40,
-            }}
-
-
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-
-
-            transition={{
-              duration: 0.5,
-              delay: index * 0.1,
-            }}
-
-
-            whileHover={{
-              y: -8,
-            }}
-
-
-            viewport={{
-              once: true,
-            }}
-
-
-            className={`
-              bg-white
-              p-6
-              rounded-2xl
-              border
-              border-[#eee]
-              transition-all
-              duration-300
-              hover:border-[#C69C6D]/50
-              hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]
-              ${!item.available ? "opacity-70" : ""}
-            `}
-
-
-          >
-
-
-
-            {/* IMAGE */}
-
-            <div className="relative">
-
-
-              <motion.img
-
-                src={item.image}
-
-                alt={item.name}
-
-
-                whileHover={{
-                  scale: 1.05,
-                }}
-
-
-                transition={{
-                  duration: 0.4,
-                }}
-
-
-                className="
-                  w-full
-                  h-48
-                  object-cover
-                  rounded-xl
-                  mb-5
-                "
-
-              />
-
-
-
-
-              {!item.available && (
-
-                <span
-                  className="
-                    absolute
-                    top-3
-                    right-3
-                    bg-black/80
-                    text-white
-                    px-3
-                    py-1
-                    rounded-full
-                    text-xs
-                    font-semibold
-                  "
-                >
-                  Unavailable
-                </span>
-
-              )}
-
-
-
-            </div>
-
-
-
-
-
-
-            {/* DETAILS */}
-
-
-            <h3 className="text-xl font-bold text-[#3B2A23]">
-              {item.name}
-            </h3>
-
-
-
-
-            <p className="text-gray-600 mt-3 leading-relaxed">
-              {item.desc}
-            </p>
-
-
-
-
-            <p className="mt-4 font-semibold text-[#C69C6D] text-lg">
-              ₵{item.price}
-            </p>
-
-
-
-
-
-
-            {/* BUTTON */}
-
-
-            <button
-
-              disabled={!item.available}
-
-              onClick={() => addToCart(item)}
-
-
-              className={`
-
-                mt-5
-                w-full
-                py-3
-                rounded-full
-                font-semibold
-                transition-all
-                duration-300
-
-
-                ${
-                  item.available
-
-                  ?
-
-                  `
-                  bg-[#C69C6D]
-                  text-black
-                  hover:bg-[#b8895f]
-                  hover:-translate-y-1
-                  hover:shadow-[0_0_25px_rgba(198,156,109,0.45)]
-                  `
-
-                  :
-
-                  `
-                  bg-gray-300
-                  text-gray-600
-                  cursor-not-allowed
-                  `
-                }
-
-              `}
-
-            >
-
-              {
-                item.available
-                ? 
-                "Add to Cart"
-                :
-                "Unavailable"
-              }
-
-
-            </button>
-
-
-
-
-          </motion.div>
-
-
+          <MenuCard
+            key={item.name}
+            item={item}
+            index={index}
+            addToCart={addToCart}
+          />
         ))}
+      </div>
+    </motion.section>
+  );
+}
 
+function MenuCard({ item, index, addToCart }) {
+  const [selectedSize, setSelectedSize] = useState(sizes[0]);
 
+  const unavailable = !item.available;
+
+  function handleAddToCart() {
+    addToCart({
+      ...item,
+      name: `${item.name} (${selectedSize.label} ${selectedSize.type})`,
+      price: selectedSize.price,
+    });
+  }
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      whileHover={!unavailable ? { y: -5 } : {}}
+      viewport={{ once: true }}
+      className={`overflow-hidden rounded-2xl border border-[#EAE3DC] bg-white p-5 transition-shadow duration-300 hover:shadow-xl ${
+        unavailable ? "opacity-70" : ""
+      }`}
+    >
+      {/* DRINK IMAGE */}
+      <div className="relative overflow-hidden rounded-xl">
+        <motion.img
+          src={item.image}
+          alt={item.name}
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.4 }}
+          className="h-52 w-full object-cover"
+        />
+
+        {unavailable && (
+          <span className="absolute right-3 top-3 rounded-full bg-black/80 px-3 py-1.5 text-xs font-semibold text-white">
+            Coming Soon
+          </span>
+        )}
       </div>
 
+      {/* DRINK DETAILS */}
+      <div className="pt-5">
+        <h3 className="font-serif text-xl font-bold text-[#3B2A23]">
+          {item.name}
+        </h3>
 
-    </motion.section>
+        <p className="mt-2 min-h-12 text-sm leading-relaxed text-gray-600">
+          {item.desc}
+        </p>
+
+        {/* SIZE SELECTOR */}
+        <div className="mt-5">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">
+            Choose your size
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {sizes.map((size) => {
+              const isSelected = selectedSize.label === size.label;
+
+              return (
+                <button
+                  key={size.label}
+                  type="button"
+                  disabled={unavailable}
+                  onClick={() => setSelectedSize(size)}
+                  aria-pressed={isSelected}
+                  className={`rounded-full border px-3 py-2 text-sm transition-colors ${
+                    isSelected
+                      ? "border-[#C69C6D] bg-[#C69C6D] text-black"
+                      : "border-[#E5DED6] bg-white text-[#3B2A23] hover:border-[#C69C6D]"
+                  } disabled:cursor-not-allowed`}
+                >
+                  {size.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* PRICE AND SIZE TYPE */}
+        <div className="mt-5 flex items-end justify-between border-t border-[#F0EBE6] pt-4">
+          <div>
+            <p className="text-xs text-gray-500">
+              {selectedSize.type}
+            </p>
+
+            <p className="mt-1 text-2xl font-semibold text-[#3B2A23]">
+              ₵{selectedSize.price.toFixed(2)}
+            </p>
+          </div>
+
+          <span className="text-xs text-gray-400">
+            {selectedSize.label}
+          </span>
+        </div>
+
+        {/* ADD TO CART */}
+        <button
+          type="button"
+          disabled={unavailable}
+          onClick={handleAddToCart}
+          className={`mt-5 w-full rounded-full py-3 font-semibold transition-all duration-300 ${
+            unavailable
+              ? "cursor-not-allowed bg-gray-300 text-gray-600"
+              : "bg-[#C69C6D] text-black hover:-translate-y-0.5 hover:bg-[#B8895F] hover:shadow-lg"
+          }`}
+        >
+          {unavailable
+            ? "Currently Unavailable"
+            : `Add to Cart · ₵${selectedSize.price}`}
+        </button>
+      </div>
+    </motion.article>
   );
 }
