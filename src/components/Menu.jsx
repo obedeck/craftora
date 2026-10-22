@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useCart } from "../context/useCart";
 import { motion } from "framer-motion";
@@ -54,11 +53,9 @@ export default function Menu() {
   return (
     <motion.section
       id="menu"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: true, amount: 0.2 }}
-      className="bg-[#F8F4F0] px-6 py-24 md:px-16"
+      initial={false}
+      animate={{ opacity: 1, y: 0 }}
+      className="relative z-0 w-full bg-[#F8F4F0] px-6 py-24 text-[#3B2A23] md:px-16"
     >
       {/* MENU HEADER */}
       <div className="mx-auto mb-14 max-w-2xl text-center">
@@ -77,11 +74,10 @@ export default function Menu() {
 
       {/* DRINK CARDS */}
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <MenuCard
             key={item.name}
             item={item}
-            index={index}
             addToCart={addToCart}
           />
         ))}
@@ -90,9 +86,8 @@ export default function Menu() {
   );
 }
 
-function MenuCard({ item, index, addToCart }) {
+function MenuCard({ item, addToCart }) {
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
-
   const unavailable = !item.available;
 
   function handleAddToCart() {
@@ -105,23 +100,20 @@ function MenuCard({ item, index, addToCart }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
+      initial={false}
+      animate={{ opacity: 1, y: 0 }}
       whileHover={!unavailable ? { y: -5 } : {}}
-      viewport={{ once: true }}
-      className={`overflow-hidden rounded-2xl border border-[#EAE3DC] bg-white p-5 transition-shadow duration-300 hover:shadow-xl ${
+      className={`relative overflow-hidden rounded-2xl border border-[#EAE3DC] bg-white p-5 transition-shadow duration-300 hover:shadow-xl ${
         unavailable ? "opacity-70" : ""
       }`}
     >
       {/* DRINK IMAGE */}
       <div className="relative overflow-hidden rounded-xl">
-        <motion.img
+        <img
           src={item.image}
           alt={item.name}
-          whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.4 }}
-          className="h-52 w-full object-cover"
+          loading="lazy"
+          className="h-52 w-full rounded-xl object-cover"
         />
 
         {unavailable && (
